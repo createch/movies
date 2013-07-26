@@ -30,18 +30,18 @@
 
 
 
+<script type="text/template" id="movie-template">
+    <p>{{ movieName }}</p>
+    <p>{{ dateAdded }}</p>
+</script>
 
 
 <div class="app">
     <header>
         <h1>Movies</h1>
     </header>
-    <script type="text/template" id="movie-template">
-        <p>{{ movieName }}</p>
-        <p>{{ dateAdded }}</p>
-    </script>
-    <div class="movies-list">
-    </div>
+    <ul class="movies-list">
+    </ul>
 </div>
 
 
@@ -60,35 +60,9 @@
 
 
 
-
-
-        <script data-main="js/app.js" src="js/require.js"></script>
+        <script data-main="js/main" src="js/vendor/require.js"></script>
         <script>
-        require.config({
-            paths: {
-                app: 'app',
-                backbone: 'vendor/backbone',
-                underscore: 'vendor/underscore',
-                jquery: 'vendor/jquery',
-                marionette: 'vendor/backbone.marionette'
-            },
-            shim: {
-                jquery: {
-                    exports: 'jQuery'
-                },
-                underscore: {
-                    exports: '_'
-                },
-                backbone: {
-                    deps: ['jquery', 'underscore'],
-                    exports: 'Backbone'
-                },
-                marionette: {
-                    deps: ['jquery', 'underscore', 'backbone'],
-                    exports: 'Marionette'
-                }
-            }
-        })
+        
         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src='//www.google-analytics.com/ga.js';
