@@ -1,44 +1,90 @@
-requirejs(['jquery', 'underscore', 'backbone', 'marionette'], function($, _, Backbone, Marionette) {
-    // Define the app and a region to show content
-    // -------------------------------------------
-    var App = new Marionette.Application()
-    App.addRegions({
-        "mainRegion": "#main"
+requirejs(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+
+    _.templateSettings = {
+        interpolate: /\{\{(.+?)\}\}/g
+    }
+
+    var Movie = Backbone.Model.extend({
+        defaults: {
+            watched: false
+        },
+        validate: function(atts) {
+            if (atts.title === undefined)
+                return "Title not set"
+            else if (atts.date === undefined)
+                return "Date not set"
+        }
     })
-    // Create a module to contain some functionality
-    // ---------------------------------------------
-    App.module("SampleModule", function(Mod, App, Backbone, Marionette, $, _) {
-        // Define a view to show
-        // ---------------------
-        var MainView = Marionette.ItemView.extend({
-            template: "#sample-template"
-        })
-        // Define a controller to run this module
-        // --------------------------------------
-        var Controller = Marionette.Controller.extend({
-            initialize: function(options) {
-                this.region = options.region
-            },
-            show: function() {
-                var model = new Backbone.Model({
-                    contentPlacement: "here"
-                })
-                var view = new MainView({
-                    model: model
-                })
-                this.region.show(view)
-            }
-        })
-        // Initialize this module when the app starts
-        // ------------------------------------------
-        Mod.addInitializer(function() {
-            Mod.controller = new Controller({
-                region: App.mainRegion
+
+    var MovieCollection = Backbone.Collection.extend({
+        model: Movie
+    })
+
+    var MovieItemView = Backbone.View.extend({
+        template: $('#movie-template').html(),
+        events: {
+            "dblclick .title": "editTitle",
+            "click .watched": "updateWatched"
+        },
+        edit: function() {
+
+        },
+        updateWatched: function() {
+
+        }
+    })
+
+    var MoviesListView = Backbone.View.extend({
+        el: $("#movies-list"),
+        render: function() {
+            console.log('render')
+            this.collection.foreach(function(item) {
+                console.log(item)
             })
-            Mod.controller.show()
-        })
+        }
     })
-    // Start the app
-    // -------------
-    App.start()
+
+
+    var Router = Backbone.Router.extend({
+        routes: {
+            "asdf": "asdf",
+            "*default": "index"
+        },
+        asdf: function() {
+            console.log("hai")
+        },
+        index: function() {
+            console.log("ij")
+            var myMovies = new MovieCollection([{
+                title: "Trainspotting",
+                date: "02/26/11",
+                watched: true,
+                id: 1
+            }, {
+                title: "Wolverine",
+                date: "6/26/13",
+                watched: false,
+                id: 2
+            }, {
+                title: "Batman Begins",
+                date: "6/26/13",
+                watched: false,
+                id: 3
+            }])
+            var listView = new MoviesListView({
+                collection: myMovies
+            })
+            listView.render()
+        },
+        initialize: function() {
+            console.log("init")
+        }
+    })
+    Backbone.history.start()
+    var router = new Router()
+    router.navigate("index", {
+        trigger: true
+    })
+    // console.log("router: " + router.navigate)()
+
 })

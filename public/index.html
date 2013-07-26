@@ -16,16 +16,52 @@
     </head>
     <body>
 
-        <header>
-            <h1>A Marionette Playground</h1>
-        </header>
 
-        <article id="main">
-        </article>
 
-        <script type="text/html" id="sample-template">
-          put some content <%= contentPlacement %>.
-        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="app">
+    <header>
+        <h1>Movies</h1>
+    </header>
+    <script type="text/template" id="movie-template">
+        <p>{{ movieName }}</p>
+        <p>{{ dateAdded }}</p>
+    </script>
+    <div class="movies-list">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <script data-main="js/app.js" src="js/require.js"></script>
         <script>
         require.config({

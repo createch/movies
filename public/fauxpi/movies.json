@@ -1,0 +1,16 @@
+[{
+title: "Trainspotting",
+date: "02/26/11",
+watched: true,
+id: 1
+}, {
+title: "Wolverine",
+date: "6/26/13",
+watched: false,
+id: 2
+}, {
+title: "Batman Begins",
+date: "6/26/13",
+watched: false,
+id: 3
+}])
