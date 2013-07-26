@@ -1,4 +1,35 @@
-requirejs(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+require.config({
+    paths: {
+        app: 'app',
+        backbone: 'vendor/backbone',
+        underscore: 'vendor/underscore',
+        jquery: 'vendor/jquery',
+        marionette: 'vendor/backbone.marionette'
+    },
+    shim: {
+        jquery: {
+            exports: 'jQuery'
+        },
+        underscore: {
+            exports: '_'
+        },
+        backbone: {
+            deps: ['jquery', 'underscore'],
+            exports: 'Backbone'
+        },
+        marionette: {
+            deps: ['jquery', 'underscore', 'backbone'],
+            exports: 'Marionette'
+        }
+    }
+})
+
+requirejs(['jquery',
+    'underscore',
+    'backbone',
+    'views/app',
+    'router/router'
+], function($, _, Backbone) {
 
     _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
@@ -31,16 +62,6 @@ requirejs(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
         },
         updateWatched: function() {
 
-        }
-    })
-
-    var MoviesListView = Backbone.View.extend({
-        el: $("#movies-list"),
-        render: function() {
-            console.log('render')
-            this.collection.foreach(function(item) {
-                console.log(item)
-            })
         }
     })
 
