@@ -6,7 +6,6 @@ define(['jquery',
 ], function($, _, Backbone, movieTemplate, Common) {
 
     var MovieView = Backbone.View.extend({
-        tagName: 'li',
         template: _.template(movieTemplate),
         events: {
             "dblclick .title": "edit",
@@ -17,14 +16,14 @@ define(['jquery',
             this.listenTo(this.model, 'destroy', this.remove)
         },
         render: function() {
-            this.$el.append(this.template(this.attributes))
+            this.$el.html(this.template(this.model.attributes))
             return this
         },
         edit: function() {
             alert("to be implemented")
         },
-        updateWatched: function() {
-            alert("to be implemented")
+        toggleWatched: function() {
+            this.model.toggleWatched()
         }
     })
 

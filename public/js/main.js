@@ -4,7 +4,8 @@ require.config({
         backbone: 'vendor/backbone',
         underscore: 'vendor/underscore',
         jquery: 'vendor/jquery',
-        marionette: 'vendor/backbone.marionette'
+        marionette: 'vendor/backbone.marionette',
+        text: 'vendor/require.text'
     },
     shim: {
         jquery: {
@@ -27,15 +28,11 @@ require.config({
 requirejs(['jquery',
     'underscore',
     'backbone',
-    'views/app',
-    'router/router'
-], function($, _, Backbone, AppView, Router) {
+    'views/app'
+], function($, _, Backbone, AppView) {
 
-    _.templateSettings = {
-        interpolate: /\{\{(.+?)\}\}/g
-    }
-    Backbone.history.start()
+    Backbone.history.start();
 
-    var a = new AppView()
+    new AppView()
 
 })

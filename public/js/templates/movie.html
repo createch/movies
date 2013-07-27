@@ -1,5 +1,4 @@
-<div class="view">
-    title: {{ title }} <br />
-    date: {{ dateWatched }} <br />
-    watched: {{ watched }}
+<div class="movie-view">
+    <input class="title" value="<%- title %>" disabled/> <%- dateWatched %>
+    <input class="watched" type="checkbox" <% if(watched){ %>checked<% } %>/>
 </div>

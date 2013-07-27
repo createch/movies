@@ -6,7 +6,7 @@ define(['underscore', 'backbone'], function(_, Backbone) {
             watched: false,
             dateWatched: ""
         },
-        toggle: function() {
+        toggleWatched: function() {
             this.set('watched', !this.get('watched'))
         }
     })
