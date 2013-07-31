@@ -1,37 +1,50 @@
 define(['jquery',
     'underscore',
     'backbone',
+    'models/movie',
     'collections/movies',
     'views/movie',
+    'views/input',
     'text!templates/status.html',
+    'backbonelocalstorage',
     'common'
-], function($, _, Backbone, Movies, MovieView, StatusTemplate, Common) {
+], function($,
+            _,
+            Backbone,
+            Movie,
+            Movies,
+            MovieView,
+            InputView,
+            StatusTemplate,
+            Store,
+            Common) {
 
     console.log("hai")
 
     var AppView = Backbone.View.extend({
         el: "#app",
-        template: _.template(StatusTemplate),
         events: {
-            'click .add': 'addMovie'
+            'click .add-new': 'addNew',
+            'click .complete-all': 'completeAll'
         },
+        template: _.template(StatusTemplate),
         initialize: function() {
             this.$movieslist = $("#movies-list")
             this.$status = $("#status")
+
             this.listenTo(Movies, 'add', this.addOne)
             this.listenTo(Movies, 'reset', this.addAll)
             this.listenTo(Movies, 'all', this.render)
 
             Movies.fetch()
-            window.Movies = Movies
+            // new InputView()
         },
         render: function() {
             var count = {
                 watched: Movies.watched().length,
                 remaining: Movies.remaining().length
             }
-            var a = this.template(count)
-            this.$status.html(a)
+            this.$status.html(this.template(count))
         },
         addOne: function(movie) {
             var view = new MovieView({
@@ -42,6 +55,16 @@ define(['jquery',
         addAll: function() {
             this.$movieslist.html("asf")
             Movies.each(this.addOne, this)
+        },
+        addNew: function() {
+            Movies.add(new Movie({}))
+        },
+        completeAll: function() {
+            Movies.each(function(movie) {
+                movie.save({
+                    watched: true
+                })
+            }, this)
         }
     })
 

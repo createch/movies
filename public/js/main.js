@@ -5,7 +5,8 @@ require.config({
         underscore: 'vendor/underscore',
         jquery: 'vendor/jquery',
         marionette: 'vendor/backbone.marionette',
-        text: 'vendor/require.text'
+        text: 'vendor/require.text',
+        backbonelocalstorage: 'vendor/backbone.localstorage'
     },
     shim: {
         jquery: {
@@ -21,6 +22,10 @@ require.config({
         marionette: {
             deps: ['jquery', 'underscore', 'backbone'],
             exports: 'Marionette'
+        },
+        backbonelocalstorage: {
+            deps: ['backbone'],
+            exports: 'Store'
         }
     }
 })

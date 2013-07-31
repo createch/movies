@@ -6,9 +6,11 @@ define(['jquery',
 ], function($, _, Backbone, movieTemplate, Common) {
 
     var MovieView = Backbone.View.extend({
+        className: 'movie-view',
         template: _.template(movieTemplate),
         events: {
-            "dblclick .title": "edit",
+            "click .title-text": "editTitle",
+            "click .update": "updateTitle",
             "click .watched": "toggleWatched"
         },
         initialize: function() {
@@ -19,8 +21,15 @@ define(['jquery',
             this.$el.html(this.template(this.model.attributes))
             return this
         },
-        edit: function() {
-            alert("to be implemented")
+        editTitle: function() {
+            $(".movie-view.active").removeClass("active")
+            this.$el.addClass("active")
+            this.$(".title-input input").focus()
+        },
+        updateTitle: function() {
+            this.model.save({
+                title: this.$(".title-input input")[0].value
+            })
         },
         toggleWatched: function() {
             this.model.toggleWatched()

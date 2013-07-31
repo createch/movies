@@ -1,4 +1,7 @@
-<div class="movie-view">
-    <input class="title" value="<%- title %>" disabled/> <%- dateWatched %>
-    <input class="watched" type="checkbox" <% if(watched){ %>checked<% } %>/>
+<div class="title-input">
+    <input type="text" class="title" value="<%- title %>"/>
+    <button class="update">update</button>
 </div>
+<span class="title-text"><%- title %></span>
+<input class="watched" type="checkbox" <% if(watched){ %>checked<% } %>/>
+<span class="date"> <%- date %></span>

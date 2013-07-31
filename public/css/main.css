@@ -92,15 +92,45 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+.hide {
+    display: none;
+}
 
-
-
-
-
-
-
-
-
+.input-view .add {
+    display: inline-block;
+    visibility: hidden;
+}
+.input-view.enabled .add {
+    visibility: visible;
+}
+input[disabled] {
+    border: none;
+}
+.movie-view {
+    padding: 5px;
+}
+.movie-view.active {
+    background-color: #eee;
+}
+.movie-view .date {
+    color: #888;
+}
+.title-input, .title-text {
+    display: block;
+    padding: 10px 0 5px;
+}
+.movie-view .title-input {
+    display: none;
+}
+.movie-view .title-text {
+    cursor: pointer;
+}
+.movie-view.active .title-input {
+    display: block;   
+}
+.movie-view.active .title-text {
+    display: none;
+}
 
 
 

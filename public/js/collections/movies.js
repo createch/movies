@@ -1,13 +1,19 @@
 define(['underscore',
     'backbone',
-    'models/movie'
-], function(_, Backbone, Movie) {
+    'models/movie',
+    'backbonelocalstorage'
+], function(_, Backbone, Movie, Store) {
 
     var MovieCollection = Backbone.Collection.extend({
+
         model: Movie,
-        url: 'fauxpi/movies.json',
+        // url: 'fauxpi/movies.json',
+        localStorage: new Store('movies'),
+        intialize: function() {
+            this.on('all', this.save, this)
+        },
         comparator: function(movie) {
-            return movie.get('dateWatched')
+            return movie.get('date')
         },
         watched: function() {
             return this.filter(function(movie) {
